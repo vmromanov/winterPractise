@@ -1,6 +1,6 @@
 ﻿#include <stdlib.h>
 #include <stdio.h>
-
+#include<errno.h>
 
 double determ(const int n, double** matrix) { 
 	double det = 0;
@@ -10,18 +10,18 @@ double determ(const int n, double** matrix) {
 		det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 		return det;
 	}
-
-	double** submatrix = (double**)calloc(n - 1, sizeof(double*));
-	if (submatrix == NULL) {
-		printf("memory allocation errorn");
-		return 1;
+	double** submatrix = NULL; 
+	submatrix = (double**)calloc(n - 1, sizeof(double*));
+	
+	if (submatrix == NULL)
+	{
+		return 0;
 	}
-
 	for (int i = 0; i < n - 1; i++) {
 		submatrix[i] = (double*)calloc(n - 1, sizeof(double));
 		if (submatrix[i] == NULL) {
-			printf("memory allocation errorn");
-			return 1;
+			printf("memory allocation errorn(submatrix[i])\n");
+			return 0;
 		}
 	}
 
@@ -77,13 +77,13 @@ void reverseMatrix(double** matrix_, double** reverse_, int size_)
 				int minor_size = size_ - 1;
 				double** minor = calloc(minor_size, sizeof(double));
 				if (minor == NULL) {
-					printf("memory allocation errorn");
+					printf("memory allocation errorn(minor)");
 					return ;
 				}
 				for (int i = 0; i < minor_size; i++) {
 					minor[i] = calloc(minor_size, sizeof(double));
 					if (minor[i] == NULL) {
-						printf("memory allocation errorn");
+						printf("memory allocation errorn(minor[i])");
 						return ;
 					}
 				}

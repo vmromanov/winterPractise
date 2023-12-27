@@ -12,13 +12,13 @@ int main()
 	scanf_s("%d", &Size);
 	double** matrix = (double**)calloc(Size, sizeof(double*));
 	if (matrix == NULL) {
-		printf("memory allocation error\n");
+		printf("memory allocation error(matrix)\n");
 		return returns;
 	}
 	for (int i = 0; i < Size; i++) {
 		matrix[i] = (double*)calloc(Size, sizeof(double));
 		if (matrix[i] == NULL) {
-			printf("memory allocation error\n");
+			printf("memory allocation error(matrix[i])\n");
 			return returns;
 		}
 	}
@@ -30,13 +30,13 @@ int main()
 		}
 	double** reverse = (double**)calloc(Size, sizeof(double*));
 	if (reverse == NULL) {
-		printf("memory allocation error\n");
+		printf("memory allocation error(reverse)\n");
 		return returns;
 	}
 	for (int i = 0; i < Size; i++) {
 		reverse[i] = (double*)calloc(Size, sizeof(double)); 
 		if (reverse[i] == NULL) { 
-			printf("memory allocation error\n");
+			printf("memory allocation error(reverse[i])\n");
 			return returns;
 		}
 	}

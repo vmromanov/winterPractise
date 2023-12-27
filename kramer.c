@@ -10,40 +10,40 @@ double determenantsearch(const int size, double** matrix) {
 		det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 		return det;
 	}
+	double** submatrix = NULL;
+	submatrix = (double**)calloc(size - 1, sizeof(double*));
 
-	double** submatrix = (double**)calloc(size - 1, sizeof(double*));
-	if (submatrix == NULL) {
-		printf("memory allocation errorn");
-		return 1;
+	if (submatrix == NULL)
+	{
+		return 0;
 	}
-
 	for (int i = 0; i < size - 1; i++) {
 		submatrix[i] = (double*)calloc(size - 1, sizeof(double));
 		if (submatrix[i] == NULL) {
-			printf("memory allocation errorn");
-			return 1;
+			printf("memory allocation errorn(submatrix[i])\n");
+			return 0;
 		}
 	}
 
-	for (int i = 0; i < size; i++) { 
+	for (int i = 0; i < size; i++) {
 		int subi = 0;
-		for (int j = 0; j < size; j++) { 
+		for (int j = 0; j < size; j++) {
 			int subj = 0;
 			if (j == i)
 				continue;
-			for (int x = 1; x < size; x++) { 
+			for (int x = 1; x <size; x++) {
 				submatrix[subi][subj] = matrix[x][j];
 				subj++;
 			}
 			subi++;
 		}
-		det = det + (i % 2 == 0 ? 1 : -1) * matrix[0][i] * determenantsearch(size - 1, submatrix);
+		det = det + (i % 2 == 0 ? 1 : ( - 1))* matrix[0][i] * determenantsearch(size - 1, submatrix); 
 	}
-	
-	for (int i = 0; i < size - 1; i++) { 
-		free(submatrix[i]); 
+
+	for (int i = 0; i < size - 1; i++) {
+		free(submatrix[i]);
 	}
-	free(submatrix); 
+	free(submatrix);
 
 	return det;
 }
@@ -91,7 +91,7 @@ void kramerMethod(double** coefficientMatrix, double* freeMembersMatrix, int Siz
 	}
 	for (int i = 0; i < Size; i++)
 	{
-		printf("x[%d] = %lf\n", i, answers[i]+1);
+		printf("x[%d] = %lf\n", i+1, answers[i]);
 	}
 	
 	for (int i = 0; i < Size; i++)
